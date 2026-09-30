@@ -237,3 +237,5 @@ require (
 	sigs.k8s.io/randfill v1.0.0 // indirect
 	sigs.k8s.io/structured-merge-diff/v6 v6.4.0 // indirect
 )
+
+replace istio.io/api => github.com/potsju/api v1.31.0-alpha.1.0.20260930052911-f1ac03d1be94

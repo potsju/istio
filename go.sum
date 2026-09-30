@@ -378,6 +378,8 @@ github.com/planetscale/vtprotobuf v0.6.1-0.20240409071808-615f978279ca/go.mod h1
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/potsju/api v1.31.0-alpha.1.0.20260930052911-f1ac03d1be94 h1:HdXGGSkF+AAm1+ZH40mNcX5+a5Ku370cKZA0PxELLGo=
+github.com/potsju/api v1.31.0-alpha.1.0.20260930052911-f1ac03d1be94/go.mod h1:+brQWcBHoROuyA6fv8rbgg8Kfn0RCGuqoY0duCMuSLA=
 github.com/prometheus/client_golang v1.23.2 h1:Je96obch5RDVy3FDMndoUsjAhG5Edi49h0RJWRi/o0o=
 github.com/prometheus/client_golang v1.23.2/go.mod h1:Tb1a6LWHB3/SPIzCoaDXI4I8UHKeFTEQ1YCr+0Gyqmg=
 github.com/prometheus/client_golang/exp v0.0.0-20260325093428-d8591d0db856 h1:1Y6bmpZb8peQCy1IpctnAhIFuyhrdtMaDnETChhSNns=
@@ -600,6 +602,8 @@ istio.io/api v1.31.0-alpha.1.0.20260928195158-409e35b92127 h1:2g327mxfqALGFAOurf
 istio.io/api v1.31.0-alpha.1.0.20260928195158-409e35b92127/go.mod h1:+brQWcBHoROuyA6fv8rbgg8Kfn0RCGuqoY0duCMuSLA=
 istio.io/client-go v1.31.0-alpha.1.0.20260928195457-15cb8ceac95b h1:sdsGT6ULDxOWcphmjSFGjMNu/v1Hr1YiM6EKoAPZ0AA=
 istio.io/client-go v1.31.0-alpha.1.0.20260928195457-15cb8ceac95b/go.mod h1:CzmY+LO9c/8K7LKZoEzmgbUqzrZIPRxTNOZKT6e/12g=
+istio.io/client-go v1.31.0-alpha.1.0.20260924081053-3eeb139684f9 h1:bawjmUcVnOyrHFeoJ2O7PNfYEdteFvajTBEFWhk4OqE=
+istio.io/client-go v1.31.0-alpha.1.0.20260924081053-3eeb139684f9/go.mod h1:Uz72p4TvV6BMBjuc7+XZYyJPMPn0VXb1b7/IboTJr74=
 k8s.io/api v0.36.1 h1:XbL/EMj8K2aJpJtePmqUyQMsM0D4QI2pvl7YKJ20FTY=
 k8s.io/api v0.36.1/go.mod h1:KOWo4ey3TINlXjeHVuwB3i+tXXnu+UcwFBHlI/9dvEo=
 k8s.io/apiextensions-apiserver v0.36.1 h1:6JfYmPUsuUIHuN+3QxutXYWj492RqF5fBSx67GYK5Ks=

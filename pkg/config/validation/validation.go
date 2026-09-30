@@ -1260,6 +1260,9 @@ func validateLoadBalancer(settings *networking.LoadBalancerSettings, outlier *ne
 				errs = AppendValidation(errs, fmt.Errorf("tableSize must be a prime number for maglev"))
 			}
 		}
+		if hbf := consistentHash.GetHashBalanceFactor(); hbf != nil && hbf.GetValue() < 100 {
+			errs = AppendValidation(errs, fmt.Errorf("hashBalanceFactor must be at least 100, got %d", hbf.GetValue()))
+		}
 	}
 
 	if bu := settings.GetBackendUtilization(); bu != nil {

@@ -970,6 +970,64 @@ func TestApplyRingHashLoadBalancer(t *testing.T) {
 				return nil
 			},
 		},
+		{
+			"consistent hash settings without hash balance factor",
+			&networking.LoadBalancerSettings{
+				LbPolicy: &networking.LoadBalancerSettings_ConsistentHash{
+					ConsistentHash: &networking.LoadBalancerSettings_ConsistentHashLB{},
+				},
+			},
+			func(c *cluster.Cluster) error {
+				if c.GetCommonLbConfig().GetConsistentHashingLbConfig() != nil {
+					return fmt.Errorf("unexpected consistent hashing config. expected: %v, got: %v", nil, c.GetCommonLbConfig().GetConsistentHashingLbConfig())
+				}
+				return nil
+			},
+		},
+		{
+			"consistent hash settings with RingHash and hash balance factor",
+			&networking.LoadBalancerSettings{
+				LbPolicy: &networking.LoadBalancerSettings_ConsistentHash{
+					ConsistentHash: &networking.LoadBalancerSettings_ConsistentHashLB{
+						HashAlgorithm: &networking.LoadBalancerSettings_ConsistentHashLB_RingHash_{
+							RingHash: &networking.LoadBalancerSettings_ConsistentHashLB_RingHash{},
+						},
+						HashBalanceFactor: &wrappers.UInt32Value{Value: 125},
+					},
+				},
+			},
+			func(c *cluster.Cluster) error {
+				if c.LbPolicy != cluster.Cluster_RING_HASH {
+					return fmt.Errorf("unexpected load balancer. expected: %v, got: %v", cluster.Cluster_RING_HASH, c.LbPolicy)
+				}
+				if got := c.GetCommonLbConfig().GetConsistentHashingLbConfig().GetHashBalanceFactor().GetValue(); got != 125 {
+					return fmt.Errorf("unexpected hash balance factor. expected: %v, got: %v", 125, got)
+				}
+				return nil
+			},
+		},
+		{
+			"consistent hash settings with Maglev and hash balance factor",
+			&networking.LoadBalancerSettings{
+				LbPolicy: &networking.LoadBalancerSettings_ConsistentHash{
+					ConsistentHash: &networking.LoadBalancerSettings_ConsistentHashLB{
+						HashAlgorithm: &networking.LoadBalancerSettings_ConsistentHashLB_Maglev{
+							Maglev: &networking.LoadBalancerSettings_ConsistentHashLB_MagLev{},
+						},
+						HashBalanceFactor: &wrappers.UInt32Value{Value: 150},
+					},
+				},
+			},
+			func(c *cluster.Cluster) error {
+				if c.LbPolicy != cluster.Cluster_MAGLEV {
+					return fmt.Errorf("unexpected load balancer. expected: %v, got: %v", cluster.Cluster_MAGLEV, c.LbPolicy)
+				}
+				if got := c.GetCommonLbConfig().GetConsistentHashingLbConfig().GetHashBalanceFactor().GetValue(); got != 150 {
+					return fmt.Errorf("unexpected hash balance factor. expected: %v, got: %v", 150, got)
+				}
+				return nil
+			},
+		},
 	}
 	for _, tt := range cases {
 		t.Run(tt.name, func(t *testing.T) {

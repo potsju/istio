@@ -223,6 +223,10 @@ func (b *clusterBuilder) applyLoadBalancing(c *cluster.Cluster, policy *networki
 
 	if lb.GetConsistentHash() != nil {
 		corexds.ApplyRingHashLoadBalancer(c, lb)
+		if c.GetCommonLbConfig().GetConsistentHashingLbConfig() != nil {
+			log.Warnf("cannot apply hashBalanceFactor to %s: not supported for proxyless gRPC", b.node.ID)
+			c.CommonLbConfig.ConsistentHashingLbConfig = nil
+		}
 		return
 	}
 

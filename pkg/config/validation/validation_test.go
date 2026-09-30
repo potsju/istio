@@ -3653,6 +3653,34 @@ func TestValidateLoadBalancer(t *testing.T) {
 		},
 
 		{
+			name: "valid load balancer with consistentHash hashBalanceFactor", in: &networking.LoadBalancerSettings{
+				LbPolicy: &networking.LoadBalancerSettings_ConsistentHash{
+					ConsistentHash: &networking.LoadBalancerSettings_ConsistentHashLB{
+						HashKey: &networking.LoadBalancerSettings_ConsistentHashLB_HttpHeaderName{
+							HttpHeaderName: "x-session-key",
+						},
+						HashBalanceFactor: &wrapperspb.UInt32Value{Value: 100},
+					},
+				},
+			},
+			valid: true,
+		},
+
+		{
+			name: "invalid load balancer with consistentHash hashBalanceFactor below 100", in: &networking.LoadBalancerSettings{
+				LbPolicy: &networking.LoadBalancerSettings_ConsistentHash{
+					ConsistentHash: &networking.LoadBalancerSettings_ConsistentHashLB{
+						HashKey: &networking.LoadBalancerSettings_ConsistentHashLB_HttpHeaderName{
+							HttpHeaderName: "x-session-key",
+						},
+						HashBalanceFactor: &wrapperspb.UInt32Value{Value: 99},
+					},
+				},
+			},
+			valid: false,
+		},
+
+		{
 			name: "invalid load balancer with consistentHash load balancing, missing name", in: &networking.LoadBalancerSettings{
 				LbPolicy: &networking.LoadBalancerSettings_ConsistentHash{
 					ConsistentHash: &networking.LoadBalancerSettings_ConsistentHashLB{

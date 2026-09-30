@@ -1,0 +1,12 @@
+apiVersion: release-notes/v2
+kind: feature
+area: traffic-management
+issue:
+  - 61951
+releaseNotes:
+  - |
+    **Added** a `hashBalanceFactor` field to `DestinationRule` consistent hash load balancing. It
+    enables Consistent Hashing with Bounded Loads, which caps each host's active requests at
+    `hashBalanceFactor / 100` times the average across all hosts and spills excess requests over to
+    other hosts, while otherwise preserving hash affinity. This applies to both `ringHash` and
+    `maglev`, and is not supported for proxyless gRPC.

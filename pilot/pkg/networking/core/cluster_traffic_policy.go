@@ -715,6 +715,15 @@ func ApplyRingHashLoadBalancer(c *cluster.Cluster, lb *networking.LoadBalancerSe
 			},
 		}
 	}
+
+	if hbf := consistentHash.GetHashBalanceFactor(); hbf != nil {
+		if c.CommonLbConfig == nil {
+			c.CommonLbConfig = &cluster.Cluster_CommonLbConfig{}
+		}
+		c.CommonLbConfig.ConsistentHashingLbConfig = &cluster.Cluster_CommonLbConfig_ConsistentHashingLbConfig{
+			HashBalanceFactor: &wrapperspb.UInt32Value{Value: hbf.GetValue()},
+		}
+	}
 }
 
 func (cb *ClusterBuilder) applyUpstreamProxyProtocol(
